@@ -1,7 +1,0 @@
-# Financial Transaction Manager
-
-## Need
-
-I use different types of means for conducting transactions. Credit cards, auto-drafts, debit cards, and checks are some of the most common means I use. Recording all these transactions and checking if my budget is balanced would require me to go through all the credit card statements manually. Some tools like Rocket or formerly Mint do unify transactions from many sources and present a uniform view, they require me to sign in and provide my password and financial information to a third party.
-
-This tool brings together financial transactions from various credit cards and bank accounts and unifies them. The input is given as a sequence of .csv files that contain all the finanical transaction information. The output is the amount of spending categorized monthly. 
