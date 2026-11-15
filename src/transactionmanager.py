@@ -1,13 +1,9 @@
 import csv
 import sys
 import copy
-#import statistics
 
 import numpy
 
-# citi.csv                            download-busey.csv
-# Discover-AllAvailable-20190203.csv  new-amex.csv
-# Discover-Search-20201228.csv        Transactions.csv
 
 class Expense:
 
