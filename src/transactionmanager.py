@@ -8,11 +8,16 @@ import numpy
 class Expense:
 
     def __init__(self):
+
+        # date, expense, reason, and category are self explanatory.
+        # weight is a special value used to sort all the transactions.
+        
         self.date = []
         self.expense = 0
         self.reason = ""
         self.category = ""
         self.weight = 0
+        
 
     def __init__(self, row, option):
 
@@ -24,9 +29,7 @@ class Expense:
             self.category = "unclassified"
             self.account = 1
             self.weight = self.date[2]*10000 + self.date[0]*100 + self.date[1] # easy to access and sort entries.
-            # print(str(date) + " - " + str(amount) + " - " + reason)
-            # print(expense(date,amount,reason))
-            # transaction += [Expense(date,amount,reason)]
+
 
         if option == 4 :
             # Code for new AmeX expense item
@@ -36,9 +39,7 @@ class Expense:
             self.category = "unclassified"
             self.account = 1
             self.weight = self.date[2]*10000 + self.date[0]*100 + self.date[1] # easy to access and sort entries.
-            # print(str(date) + " - " + str(amount) + " - " + reason)
-            # print(expense(date,amount,reason))
-            # transaction += [Expense(date,amount,reason)]
+
 
             
         if option == 2 :
@@ -49,36 +50,22 @@ class Expense:
             self.category = "unclassified"
             self.account = 2
             self.weight = self.date[2]*10000 + self.date[0]*100 + self.date[1] # easy to access and sort entries.            
-            # print(str(date) + " - " + str(amount) + " - " + reason)
-            # transaction += [Expense(date,amount,reason)]
+
             
         if option == 3 :
             # Code for citi expense item
             self.date = convertToDateCiti(row[1])
             if row[3] != '':
-                # transaction += [Expense(convertToDateCiti(row[1]), float(row[3]), row[2])]
-                # print(Expense(convertToDateCiti(row[1]), float(row[3]), row[2]))
                 self.expense = float(row[3])
             elif row[4] != '' :
                 self.expense = float(row[4])
-                # transaction += [Expense(convertToDateCiti(row[1]), float(row[4]), row[2])]
             else:
                 self.expense = 0
 
             self.reason = row[2]
-            # print(str(date) + " - " + str(amount) + " - " + reason)
-            # transaction += [Expense(date,amount,reason)]
             self.category = "unclassified"
             self.account = 3
             self.weight = self.date[2]*10000 + self.date[0]*100 + self.date[1] # easy to access and sort entries.            
-
-    # def __init__(self, date, expense, reason):
-    #     self.date = date.copy()
-    #     self.expense = expense
-    #     self.reason = reason
-    #     self.category = ""
-    #     self.weight = date[2]*10000 + date[0]*100 + date[1] # easy way to access and sort all entries.
-
         
     def __lt__(self, other):
         return self.weight < other.weight
@@ -118,10 +105,8 @@ def convertToDateAmeX(date):
     year = int(date[6:10])
     array = [month,day,year]
     return array
-    # print("month - "+str(month)+"- / - day - "+str(day)+" - / - year - "+str(year))
-    # print(date)
 
-
+# Sample transaction files used in running the program.
 
 files = [["./transactions/amex1.csv", 1, 0], ["./transactions/amex2.csv", 4, 1], ["./transactions/disc1.csv", 2, 1], ["./transactions/disc2.csv", 2, 1], ["./transactions/citi1.csv", 3, 1]]
     
@@ -129,7 +114,7 @@ transaction = []
 
 transactions = []
 
-newNumTrans = 0
+# Skipone is useful in some formats where an extra line is used for documentation.
 
 skipone = 0
 for element in files:
@@ -141,21 +126,16 @@ for element in files:
         skipone = 1
 
     for row in reader:
-        newNumTrans+=1
-        # print(newNumTrans)
         if skipone == 1 :
             skipone = 0
-            print("is it skipping?")
             continue
         transactions += [Expense(row,entryType)]
 
+#
+
 transactions.sort(key = lambda x : x.weight)
 
-# for entries in transactions:
-#     print(entries)
-# print(transactions)
 
-print(newNumTrans)
 
 years = range(2017, 2021)
 months = range(1, 13)
@@ -173,6 +153,3 @@ for year in years :
         print(str(year) + " - " + str(month) + " - " + str(sum))
     expenses += [monthly]
 
-# for i in expenses :
-#     print(i)
-# print(expenses)
